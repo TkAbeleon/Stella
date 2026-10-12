@@ -104,6 +104,7 @@
     <string name="cmd_disabled_stale">Commandes désactivées : données périmées ou appareil hors ligne.</string>
     <string name="cmd_disabled_emergency">Commandes désactivées : arrêt d\'urgence actif.</string>
     <string name="cmd_disabled_manual">Commandes désactivées : sélecteur matériel en MANUEL.</string>
+    <string name="cmd_disabled_unknown">Commandes désactivées : état des sécurités inconnu.</string>
     <string name="cmd_disabled_busy">Une commande est déjà en cours de suivi.</string>
     <string name="cmd_progress_title">Commande suivie</string>
     <string name="cmd_progress_note">Une réponse « enregistrée » ne prouve pas l\'exécution : seul le statut renvoyé par le contrôleur fait foi.</string>
