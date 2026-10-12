@@ -1,116 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Energy Command</string>
+    <string name="app_name">Stella</string>
 
-    <!-- Messages de validation de la connexion -->
-    <string name="err_identifiant_requis">Veuillez saisir votre identifiant</string>
-    <string name="err_mdp_requis">Veuillez saisir votre mot de passe</string>
-    <string name="err_email_invalide">Adresse email invalide</string>
-    <string name="err_mdp_court">Le mot de passe doit contenir au moins 6 caractères</string>
-    <string name="err_username_invalide">3 à 64 caractères : lettres, chiffres, _ ou - uniquement</string>
-    <string name="err_identifiants">Identifiants incorrects</string>
-    <string name="msg_identifiants_invalides">Aucun compte ne correspond. Vérifiez l\'identifiant et le mot de passe.</string>
-    <string name="msg_connexion_ok">Connexion réussie !</string>
-    <string name="msg_mode_demo">Serveur éteint — connexion en mode local (comptes de démonstration).</string>
-    <string name="toggle_theme">Basculer le thème jour/nuit</string>
+    <!-- Navigation -->
+    <string name="nav_overview">Vue d\'ensemble</string>
+    <string name="nav_commands">Commandes</string>
+    <string name="nav_events">Événements</string>
+    <string name="nav_settings">Paramètres</string>
 
-    <!-- Aide : comptes de démonstration (serveur éteint uniquement) -->
-    <string name="demo_accounts">Mode démonstration (serveur éteint) :\n• admin / admin123 (ADMIN)\n• responsable / resp123 (RESPONSABLE)\n• personnel / pers123 (USER)\nLes comptes réels sont créés par l\'admin (ou un responsable) sur le serveur.</string>
+    <!-- Connexion -->
+    <string name="login_subtitle">Supervision de l\'alimentation JIRAMA / UPS / GE</string>
+    <string name="login_username">Identifiant</string>
+    <string name="login_password">Mot de passe</string>
+    <string name="login_server">URL du serveur (développement)</string>
+    <string name="login_button">Se connecter</string>
+    <string name="login_loading">Connexion…</string>
+    <string name="login_empty_fields">Renseignez l\'identifiant et le mot de passe.</string>
 
-    <!-- Communs aux 3 interfaces -->
-    <string name="welcome_format">Bienvenue, %s</string>
-    <string name="btn_quitter">Quitter</string>
-    <string name="section_source">Source d\'alimentation</string>
-    <string name="section_ligne">Ligne fixe JIRAMA</string>
-    <string name="section_carburant">Carburant du groupe électrogène</string>
-    <string name="section_alertes">Alertes actives</string>
-    <string name="section_historique">Historique de la ligne fixe</string>
-    <string name="section_timeline">Changements de source</string>
-    <string name="etat_ligne_ok">SOUS TENSION</string>
-    <string name="etat_ligne_coupure">COUPURE</string>
-    <string name="etat_ligne_inconnue">ÉTAT INCONNU</string>
-    <string name="depuis_format">Depuis %s</string>
-    <string name="bascule_dans">Bascule automatique vers le groupe dans %s</string>
-    <string name="bascule_depassee">Délai de bascule dépassé — attente du secours</string>
-    <string name="carburant_pourcent">Niveau : %d %%</string>
-    <string name="mesure_le">Mesuré le %s</string>
-    <string name="aucune_alerte">Aucune alerte active</string>
-    <string name="aucune_donnee">Aucune donnée</string>
-    <string name="prochaine_coupure_format">Prochaine coupure programmée (JIRAMA) : %s</string>
+    <!-- Erreurs -->
+    <string name="err_invalid_credentials">Identifiant ou mot de passe incorrect.</string>
+    <string name="err_network">Serveur injoignable. Vérifiez la connexion et l\'URL du serveur.</string>
+    <string name="err_session_expired">Session expirée. Veuillez vous reconnecter.</string>
+    <string name="err_forbidden">Action non autorisée pour votre rôle.</string>
+    <string name="err_validation">Données invalides.</string>
+    <string name="err_bad_response">Réponse du serveur illisible.</string>
+    <string name="err_generic">Erreur : %1$s</string>
+    <string name="err_no_device">Aucun équipement disponible pour votre compte.</string>
 
-    <!-- Source des données (serveur réel vs démo) -->
-    <string name="source_serveur">Source : capteurs réels —</string>
-    <string name="source_demo">Source : données de démonstration (serveur éteint)</string>
-    <string name="source_demo_erreur">Source : démonstration (%s)</string>
+    <!-- Communs -->
+    <string name="refresh">Actualiser</string>
+    <string name="loading">Chargement…</string>
+    <string name="unknown">Inconnu</string>
+    <string name="cancel">Annuler</string>
+    <string name="none_value">—</string>
+    <string name="last_update">Dernière mise à jour : %1$s</string>
+    <string name="banner_stale">Données périmées — état inconnu</string>
+    <string name="banner_offline">Hors ligne — données en cache (anciennes). Aucune commande ne peut être envoyée.</string>
 
-    <!-- Interface 1 : Admin / Responsable (même tableau de bord) -->
-    <string name="titre_admin">Energy Command — Admin</string>
-    <string name="titre_responsable">Energy Command — Responsable</string>
-    <string name="btn_aller_commande">Commande du groupe (démo)</string>
-    <string name="btn_gestion_utilisateurs">Gérer les utilisateurs</string>
+    <!-- Vue d\'ensemble -->
+    <string name="dash_connection">Connexion</string>
+    <string name="conn_online">Appareil en ligne</string>
+    <string name="conn_offline">Appareil hors ligne</string>
+    <string name="conn_unknown">Connexion inconnue</string>
+    <string name="last_seen">Dernière communication : %1$s</string>
+    <string name="dash_state">État global</string>
+    <string name="dash_remaining">Temps restant (mesure du contrôleur) : %1$d min %2$02d s</string>
+    <string name="dash_power">Alimentation</string>
+    <string name="src_jirama">JIRAMA</string>
+    <string name="src_ups">UPS</string>
+    <string name="src_ge">Groupe électrogène</string>
+    <string name="src_ats">ATS</string>
+    <string name="src_safety">Sécurités</string>
+    <string name="jirama_present">● Présente</string>
+    <string name="jirama_absent">▲ Absente</string>
+    <string name="ups_low">▲ Batterie faible</string>
+    <string name="ups_ok">● Batterie normale</string>
+    <string name="ge_absent">Absent</string>
+    <string name="ge_detected">▲ Détecté, non stable</string>
+    <string name="ge_stable">● Tension stable</string>
+    <string name="ge_running">● En marche</string>
+    <string name="ats_jirama">Sur JIRAMA</string>
+    <string name="ats_ge">Sur GE</string>
+    <string name="ats_other">▲ Position : %1$s (à vérifier)</string>
+    <string name="safety_ok">● Aucune sécurité active</string>
+    <string name="safety_emergency">■ ARRÊT D\'URGENCE ACTIF</string>
+    <string name="safety_manual">▲ Sélecteur MANUEL actif</string>
+    <string name="safety_fault">■ Défaut GE : %1$s</string>
+    <string name="dash_alerts">Alertes ouvertes : %1$d</string>
+    <string name="dash_events">Derniers événements</string>
+    <string name="dash_active_command">Commande en cours : %1$s — %2$s</string>
 
-    <!-- Interface 2 : Observation (lecture seule) -->
-    <string name="titre_observation">Energy Command — Consultation</string>
-    <string name="mode_consultation">Mode consultation : états, alertes et historiques visibles, aucune commande possible.</string>
+    <!-- États globaux (codes serveur -> texte) -->
+    <string name="st_normal">Normal</string>
+    <string name="st_jirama_outage">Coupure JIRAMA</string>
+    <string name="st_waiting">En attente</string>
+    <string name="st_ge_starting">Démarrage GE</string>
+    <string name="st_ge_stable">GE stable</string>
+    <string name="st_transferring">Transfert en cours</string>
+    <string name="st_ge_power">Alimentation GE</string>
+    <string name="st_returning">Retour JIRAMA</string>
+    <string name="st_fault">Défaut</string>
+    <string name="st_manual">Mode manuel</string>
 
-    <!-- Interface 3 : Commande (démonstration) -->
-    <string name="titre_commande">Commande du groupe</string>
-    <string name="btn_demarrer">Démarrer le groupe (démo)</string>
-    <string name="btn_arreter">Arrêter le groupe (démo)</string>
-    <string name="msg_groupe_demarre">Groupe électrogène démarré (démo).</string>
-    <string name="msg_groupe_arrete">Groupe électrogène arrêté (démo).</string>
-    <string name="note_commande_serveur">Bascule AUTOMATIQUE côté serveur : l\'ESP32 bascule sur le groupe après le délai configuré sans retour de la ligne JIRAMA. La commande manuelle (route FORCAGE_) n\'est pas encore disponible sur le serveur — bouton actif en mode démonstration uniquement.</string>
-    <string name="source_reelle">Source actuelle (capteurs réels)</string>
+    <!-- Commandes -->
+    <string name="cmd_start_ge">Démarrer le GE</string>
+    <string name="cmd_stop_ge">Arrêter le GE</string>
+    <string name="cmd_transfer_ge">Transférer vers GE</string>
+    <string name="cmd_transfer_jirama">Retour JIRAMA</string>
+    <string name="cmd_reset_fault">Acquitter le défaut</string>
+    <string name="cmd_mode_auto">Passer en mode AUTO</string>
+    <string name="cmd_mode_remote">Passer en mode DISTANT</string>
+    <string name="cmd_confirm_title">Confirmer la commande</string>
+    <string name="cmd_confirm_yes">Confirmer</string>
+    <string name="cmd_confirm_start">Demander le démarrage du groupe électrogène ? Le contrôleur vérifie l\'état physique avant d\'exécuter : l\'exécution n\'est pas garantie.</string>
+    <string name="cmd_confirm_stop">Demander l\'arrêt du groupe électrogène ? Si la charge est sur le GE, vérifiez d\'abord l\'alimentation de remplacement.</string>
+    <string name="cmd_confirm_transfer_ge">Demander le transfert de la charge vers le GE ? Le contrôleur refusera si le GE n\'est pas confirmé stable.</string>
+    <string name="cmd_confirm_transfer_jirama">Demander le retour de la charge sur la JIRAMA ? Le contrôleur refusera si la JIRAMA n\'est pas stable.</string>
+    <string name="cmd_confirm_reset_fault">Demander l\'acquittement du défaut ? Cela ne corrige pas la cause physique du défaut.</string>
+    <string name="cmd_confirm_mode_auto">Demander le passage en mode AUTO ?</string>
+    <string name="cmd_confirm_mode_remote">Demander le passage en mode DISTANT ? Un sélecteur matériel MANUEL reste prioritaire.</string>
+    <string name="cmd_reason_default">Demande opérateur</string>
+    <string name="cmd_disabled_role">Votre rôle ne permet pas de commander.</string>
+    <string name="cmd_disabled_stale">Commandes désactivées : données périmées ou appareil hors ligne.</string>
+    <string name="cmd_disabled_emergency">Commandes désactivées : arrêt d\'urgence actif.</string>
+    <string name="cmd_disabled_manual">Commandes désactivées : sélecteur matériel en MANUEL.</string>
+    <string name="cmd_disabled_unknown">Commandes désactivées : état des sécurités inconnu.</string>
+    <string name="cmd_disabled_busy">Une commande est déjà en cours de suivi.</string>
+    <string name="cmd_progress_title">Commande suivie</string>
+    <string name="cmd_progress_note">Une réponse « enregistrée » ne prouve pas l\'exécution : seul le statut renvoyé par le contrôleur fait foi.</string>
+    <string name="cmd_tracking_stopped">Suivi interrompu. Consultez l\'historique pour le résultat.</string>
+    <string name="cmd_history">Historique des commandes</string>
+    <string name="cmd_history_empty">Aucune commande.</string>
+    <string name="cmd_sent_pending">Envoi de la demande…</string>
+    <string name="cmd_error_retry">Envoi non confirmé (réseau). Réessayer réutilise la même demande, sans doublon.</string>
 
-    <!-- Gestion des utilisateurs (ADMIN et RESPONSABLE, API /api/users) -->
-    <string name="titre_gestion">Gestion des utilisateurs</string>
-    <string name="btn_retour">Retour</string>
-    <string name="section_ajout_compte">Ajouter un compte</string>
-    <string name="section_comptes_existants">Comptes existants</string>
-    <string name="label_role">Rôle du compte</string>
-    <string name="btn_ajouter_compte">Ajouter ce compte</string>
-    <string name="btn_supprimer">Supprimer</string>
-    <string name="titre_suppression">Supprimer le compte</string>
-    <string name="msg_confirmer_suppression">Supprimer définitivement le compte « %s » ?</string>
-    <string name="msg_compte_supprime">Compte supprimé.</string>
-    <string name="msg_suppression_refusee">Suppression refusée : %s</string>
-    <string name="msg_compte_cree_role">Compte créé sur le serveur (rôle %s).</string>
-    <string name="msg_doublon">Création refusée — %s</string>
-    <string name="msg_champ_invalide">Champ refusé — %s</string>
-    <string name="msg_creation_refusee">Création refusée par le serveur — %s</string>
-    <string name="msg_session_expiree">Session expirée — veuillez vous reconnecter.</string>
-    <string name="aucun_compte">Aucun compte sur le serveur.</string>
-    <string name="err_reponse_inattendue">Réponse du serveur illisible (format inattendu).</string>
-    <string name="err_serveur_injoignable">Serveur inaccessible. Vérifiez que le serveur Spring Boot est démarré sur le PC (port 8081) et que le téléphone est sur le même Wi-Fi.</string>
-    <string name="err_admin_responsable_requis">Accès refusé : les rôles ADMIN ou RESPONSABLE sont requis pour la gestion des comptes.</string>
+    <!-- Statuts de commande -->
+    <string name="cs_queued">En attente</string>
+    <string name="cs_delivered">Livrée</string>
+    <string name="cs_accepted">Acceptée</string>
+    <string name="cs_running">En cours</string>
+    <string name="cs_succeeded">Terminée</string>
+    <string name="cs_rejected">Refusée</string>
+    <string name="cs_failed">Échec</string>
+    <string name="cs_expired">Expirée</string>
+    <string name="cs_cancelled">Annulée</string>
 
-    <!-- Libellés des rôles (codes serveur : ADMIN, RESPONSABLE, USER) -->
-    <string name="role_admin_court">Administrateur</string>
-    <string name="role_responsable_court">Responsable</string>
-    <string name="role_user_court">Client (consultation seule)</string>
+    <!-- Événements et alertes -->
+    <string name="ev_alerts">Alertes ouvertes</string>
+    <string name="ev_journal">Journal des événements</string>
+    <string name="ev_filter_all">Toutes sévérités</string>
+    <string name="ev_empty">Aucun événement.</string>
+    <string name="ev_alerts_empty">Aucune alerte ouverte.</string>
+    <string name="ev_ack">Acquitter</string>
+    <string name="ev_ack_done">Alerte acquittée.</string>
+    <string name="ev_ack_note">Acquitter une alerte ne réinitialise pas un défaut physique.</string>
 
-    <!-- Choix de rôle à la création : dépend du compte connecté.
-         ADMIN peut créer les 3 rôles ; RESPONSABLE ne peut pas créer d’ADMIN
-         (anti-élévation : le serveur renverrait 403). -->
-    <string-array name="roles_admin">
-        <item>@string/role_choix_user</item>
-        <item>@string/role_choix_responsable</item>
-        <item>@string/role_choix_admin</item>
-    </string-array>
-    <string-array name="roles_responsable">
-        <item>@string/role_choix_user</item>
-        <item>@string/role_choix_responsable</item>
-    </string-array>
-    <string name="role_choix_user">Client — consultation seule (USER)</string>
-    <string name="role_choix_responsable">Responsable (RESPONSABLE)</string>
-    <string name="role_choix_admin">Administrateur (ADMIN)</string>
-
-    <!-- Adresse du serveur (modifiable sur l\'écran de connexion) -->
-    <string name="serveur_format">Serveur : %1$s — appareil : %2$s — toucher pour modifier</string>
-    <string name="titre_serveur">Serveur et appareil</string>
-    <string name="hint_url_serveur">http://IP-du-PC:8081</string>
-    <string name="hint_device_id">deviceId de l\'ESP32 (ex. esp32-01)</string>
-    <string name="msg_aide_serveur">L\'application interroge le serveur Spring Boot installé sur votre PC (port 8081). Saisissez son adresse (ex. http://192.168.1.40:8081) et le deviceId de l\'ESP32 remontant les mesures. Laissez vide pour revenir aux valeurs par défaut. Le téléphone et le PC doivent être sur le même réseau Wi-Fi.</string>
-    <string name="btn_enregistrer">Enregistrer</string>
-    <string name="msg_url_enregistree">Configuration du serveur enregistrée.</string>
-    <string name="err_url_invalide">L\'adresse doit commencer par http:// ou https://</string>
+    <!-- Paramètres -->
+    <string name="set_account">Compte</string>
+    <string name="set_role">Rôle : %1$s</string>
+    <string name="set_server">Serveur</string>
+    <string name="set_server_save">Enregistrer l\'URL</string>
+    <string name="set_server_saved">URL enregistrée.</string>
+    <string name="set_device">Équipement</string>
+    <string name="set_firmware">Version firmware : %1$s</string>
+    <string name="set_logout">Se déconnecter</string>
+    <string name="set_admin">Administration</string>
+    <string name="set_admin_todo">Gestion des utilisateurs et configuration des temporisations : à venir (P1). Les paramètres électriques restent masqués tant que la responsable électronique ne les a pas validés.</string>
 </resources>

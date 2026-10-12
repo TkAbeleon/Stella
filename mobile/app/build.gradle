@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.myapplication'
+    namespace 'mg.stella.mobile'
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -11,17 +11,30 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.myapplication"
+        applicationId "mg.stella.mobile"
         minSdk 24
         targetSdk 36
         versionCode 1
-        versionName "1.0"
-
+        versionName "0.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        buildConfig true
+    }
+
     buildTypes {
+        debug {
+            // Émulateur Android -> FastAPI sur le PC hôte. HTTP clair autorisé en debug uniquement.
+            buildConfigField "String", "DEFAULT_BASE_URL", "\"http://10.0.2.2:8000/api/v1\""
+            buildConfigField "boolean", "ALLOW_SERVER_EDIT", "true"
+            manifestPlaceholders = [usesCleartext: "true"]
+        }
         release {
+            // À REMPLACER avant mise en production : HTTPS obligatoire.
+            buildConfigField "String", "DEFAULT_BASE_URL", "\"https://stella.example.invalid/api/v1\""
+            buildConfigField "boolean", "ALLOW_SERVER_EDIT", "false"
+            manifestPlaceholders = [usesCleartext: "false"]
             optimization {
                 enable false
             }
@@ -34,12 +47,11 @@ android {
 }
 
 dependencies {
-    implementation libs.activity.ktx
     implementation libs.appcompat
     implementation libs.constraintlayout
     implementation libs.material
     testImplementation libs.junit
+    testImplementation 'org.json:json:20240303'
     androidTestImplementation libs.espresso.core
     androidTestImplementation libs.ext.junit
-    implementation 'com.google.android.material:material:1.11.0'
 }

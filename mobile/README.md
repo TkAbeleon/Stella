@@ -1,24 +1,27 @@
 # Application Android mobile — Java
 
-Ce dossier contient maintenant un projet Android Gradle compilable, initialisé à partir de l'application Java existante avant la réorganisation. L'ancienne copie reste préservée sous `Archive/avant-reorganisation/Interface/`.
+Ce dossier contient le projet Android actif Stella, package `mg.stella.mobile`, conservé avant la dernière réorganisation. L'ancien prototype Android est sauvegardé séparément dans `Archive/avant-reorganisation/Interface/`.
 
 ## Compiler localement
 
-Sur un poste ayant un JDK 21 et le SDK Android installé :
+Prérequis : JDK 21 et Android SDK correspondant au `compileSdk` du module.
 
-~~~bash
+```bash
 chmod +x ./gradlew
 ./gradlew --no-daemon testDebugUnitTest assembleDebug
-~~~
+```
 
-L'APK de debug est produit sous `app/build/outputs/apk/debug/app-debug.apk`.
+APK de débogage attendu : `app/build/outputs/apk/debug/app-debug.apk`.
 
-## Build automatique
+## Compilation automatique
 
-Le workflow [Android Build](../.github/workflows/android-build.yml) s'exécute à chaque push sur `main` touchant `mobile/**), lors d'une pull request ciblant `main`, ou manuellement depuis l'onglet GitHub Actions. Il compile et teste les sources puis publie l'APK comme artefact téléchargeable du run.
+Le workflow [Android Build](../.github/workflows/android-build.yml) s'exécute sur les modifications de `mobile/**` poussées sur `main`, les pull requests ciblant `main`, et peut être lancé manuellement. Après réussite, il publie l'APK comme artefact GitHub Actions pendant 14 jours.
 
-## État d'intégration
+## Configuration
 
-Le code Java actif est une base existante conservée pour obtenir un build reproductible. Son client API historique communique encore avec les anciennes routes Java/Spring. Il faudra ensuite adapter `ApiClient` au contrat cible de `../Doc/API_FASTAPI_MOBILE.md`. Le fait que l'APK compile ne signifie donc pas que l'application est déjà intégrée au nouveau backend FastAPI.
+- Le package Android et le namespace sont `mg.stella.mobile`.
+- En debug, l'émulateur utilise `http://10.0.2.2:8000/api/v1` pour joindre FastAPI sur le PC hôte.
+- Le build release utilise un domaine fictif de remplacement ; configurer une vraie URL HTTPS avant livraison.
+- Ne pas inclure de secrets dans l'APK.
 
-La conception fonctionnelle des écrans et la palette cible sont décrites dans [DESIGN_MOBILE.md](../Doc/DESIGN_MOBILE.md). L'intégration de ces changements visuels et fonctionnels reste à réaliser.
+Le contrat API cible est décrit dans [API_FASTAPI_MOBILE.md](../Doc/API_FASTAPI_MOBILE.md). Le workflow vérifie la compilation et les tests unitaires, mais ne prouve pas à lui seul l'intégration avec un serveur FastAPI en fonctionnement.
