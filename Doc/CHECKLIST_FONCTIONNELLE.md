@@ -2,6 +2,8 @@
 
 Cocher uniquement après implémentation et test, pas lorsque la fonction est simplement documentée.
 
+> Application Java : code écrit sur la branche `feature/mobile-android` mais non compilé ni testé sur appareil — les cases restent donc décochées. Détails : [MOBILE_IMPLEMENTATION.md](MOBILE_IMPLEMENTATION.md).
+
 ## P0 — Minimum démontrable
 
 ### Backend et stockage
@@ -36,16 +38,16 @@ Cocher uniquement après implémentation et test, pas lorsque la fonction est si
 - [ ] Une requête répétée ne provoque pas une commande dupliquée.
 - [ ] Mode manuel et arrêt d'urgence restent prioritaires.
 
-### Application Java
-- [ ] Connexion et gestion de session expirée.
-- [ ] Tableau de bord et état alimentation.
-- [ ] Statut JIRAMA, UPS, GE, ATS avec heure et fraîcheur.
-- [ ] Confirmation des commandes.
-- [ ] Progression des commandes visible.
-- [ ] Historique et alertes consultables.
-- [ ] Chargement, erreur réseau, état vide et hors ligne traités.
-- [ ] Accès administrateur conditionné par le rôle.
-- [ ] Palette JIRAMA et contrastes vérifiés.
+### Application Java 
+- [ ] Connexion et gestion de session expirée.  *(implémenté, non testé)*
+- [ ] Tableau de bord et état alimentation.  *(implémenté, non testé)*
+- [ ] Statut JIRAMA, UPS, GE, ATS avec heure et fraîcheur.  *(implémenté, non testé)*
+- [ ] Confirmation des commandes.  *(implémenté, non testé)*
+- [ ] Progression des commandes visible.  *(implémenté, non testé)*
+- [ ] Historique et alertes consultables.  *(implémenté, non testé)*
+- [ ] Chargement, erreur réseau, état vide et hors ligne traités.  *(implémenté, non testé)*
+- [ ] Accès administrateur conditionné par le rôle.  *(squelette seulement ; implémenté, non testé)*
+- [ ] Palette JIRAMA et contrastes vérifiés. *(palette appliquée, contrastes calculés ; non testé sur appareil)*
 
 ### Simulateur et tests
 - [ ] Perte JIRAMA et temporisation.

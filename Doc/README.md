@@ -22,3 +22,5 @@ Cette documentation définit la cible à développer maintenant. Elle combine le
 - [Sketch de référence](../Electronique/reference/DetectionJIRAMA2.ino)
 
 Les routes ci-dessous sont la cible du nouveau développement, pas la description de l'ancien serveur Java ou du sketch.
+
+- [Journal d'implémentation mobile](MOBILE_IMPLEMENTATION.md) — ce qui est fait, hypothèses API, reste à faire.
