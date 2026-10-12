@@ -9,7 +9,9 @@ import jwt
 
 from app.core.config import settings
 
-_ITERATIONS = 200_000
+import os
+
+_ITERATIONS = int(os.getenv("PASSWORD_HASH_ITERATIONS", "200000"))
 _ALGO = "HS256"
 
 
