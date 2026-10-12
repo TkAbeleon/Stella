@@ -1,59 +1,24 @@
 # Application Android mobile — Java
 
-L'application cible est native Android en Java. Les fichiers de l'ancienne application sont conservés sous Archive/avant-reorganisation/Interface/. Le nouveau développement doit respecter Doc/API_FASTAPI_MOBILE.md et Doc/DESIGN_MOBILE.md.
+Ce dossier contient maintenant un projet Android Gradle compilable, initialisé à partir de l'application Java existante avant la réorganisation. L'ancienne copie reste préservée sous `Archive/avant-reorganisation/Interface/`.
 
-## Organisation recommandée
+## Compiler localement
 
-~~~text
-mobile/
-├── app/src/main/java/.../
-│   ├── api/          # client HTTP, DTO, erreurs
-│   ├── auth/         # session et permissions
-│   ├── data/         # repositories et cache léger
-│   ├── model/        # modèles de présentation
-│   ├── ui/
-│   │   ├── login/
-│   │   ├── dashboard/
-│   │   ├── commands/
-│   │   ├── events/
-│   │   ├── alerts/
-│   │   ├── settings/
-│   │   └── users/
-│   └── util/
-├── design/
-├── build.gradle
-└── README.md
+Sur un poste ayant un JDK 21 et le SDK Android installé :
+
+~~~bash
+chmod +x ./gradlew
+./gradlew --no-daemon testDebugUnitTest assembleDebug
 ~~~
 
-## Règles d'implémentation
+L'APK de debug est produit sous `app/build/outputs/apk/debug/app-debug.apk`.
 
-- Utiliser Java et les composants Android/Material compatibles avec le projet.
-- Regrouper les requêtes dans un client API unique.
-- Ne jamais intégrer une clé d'appareil ou un secret backend dans l'APK.
-- Montrer l'état réellement rapporté par l'appareil et l'heure de dernière mise à jour.
-- Après une commande, montrer son statut ; ne pas déduire la réussite de la seule réponse HTTP.
-- Exiger une confirmation avant les actions physiques et désactiver les actions lorsque les données sont périmées ou inconnues.
-- Les permissions sont vérifiées par le backend, même si l'écran est masqué.
-- Tester petits écrans, textes agrandis, rotation et pertes réseau.
+## Build automatique
 
-## Construire et lancer
+Le workflow [Android Build](../.github/workflows/android-build.yml) s'exécute à chaque push sur `main` touchant `mobile/**), lors d'une pull request ciblant `main`, ou manuellement depuis l'onglet GitHub Actions. Il compile et teste les sources puis publie l'APK comme artefact téléchargeable du run.
 
-1. Ouvrir le dossier `mobile/` dans Android Studio (JDK 21, SDK Android 36) et synchroniser Gradle.
-2. Démarrer FastAPI sur le PC (port 8000). Dans l'émulateur, `10.0.2.2` désigne le PC : l'URL par défaut du build `debug` est `http://10.0.2.2:8000/api/v1` (modifiable sur l'écran de connexion). Sur un téléphone réel, saisir `http://<IP-du-PC>:8000/api/v1`.
-3. Lancer `app` ; tests unitaires : `./gradlew test`.
-4. Build `release` : définir l'URL HTTPS dans `app/build.gradle` (`DEFAULT_BASE_URL`).
+## État d'intégration
 
-Statut, hypothèses sur l'API et travail restant : voir [Doc/MOBILE_IMPLEMENTATION.md](../Doc/MOBILE_IMPLEMENTATION.md).
+Le code Java actif est une base existante conservée pour obtenir un build reproductible. Son client API historique communique encore avec les anciennes routes Java/Spring. Il faudra ensuite adapter `ApiClient` au contrat cible de `../Doc/API_FASTAPI_MOBILE.md`. Le fait que l'APK compile ne signifie donc pas que l'application est déjà intégrée au nouveau backend FastAPI.
 
-## Structure réellement implémentée
-
-~~~text
-app/src/main/java/mg/stella/mobile/
-├── api/        ApiClient, ApiException
-├── auth/       SessionManager
-├── model/      DeviceStatus, EventItem, CommandInfo
-├── ui/         MainActivity, BaseFragment, ErrorMessages
-│   ├── login/ dashboard/ commands/ events/ settings/
-└── util/       Json, Dates, Labels
-~~~
-(Les écrans « users » sont reportés en P1.)
+La conception fonctionnelle des écrans et la palette cible sont décrites dans [DESIGN_MOBILE.md](../Doc/DESIGN_MOBILE.md). L'intégration de ces changements visuels et fonctionnels reste à réaliser.
