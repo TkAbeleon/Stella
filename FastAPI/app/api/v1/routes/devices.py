@@ -3,7 +3,6 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.api.deps import admin_only, any_user, device_auth, get_current_user, known_device
-from app.core.errors import ApiError
 from app.db.models import Alert, Device, User
 from app.db.session import get_db
 from app.schemas.device import ConfigPatch, HeartbeatIn

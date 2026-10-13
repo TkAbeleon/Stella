@@ -20,7 +20,7 @@ from app.schemas.device import AckIn, EventIn, HeartbeatIn
 from app.services import commands as commands_svc
 from app.services import devices as devices_svc
 from app.services import events as events_svc
-from app.services.virtual_device import DEFAULT_CONFIG, VirtualDevice
+from app.services.virtual_device import VirtualDevice
 
 MAX_QUEUE = 100  # file bornée en cas de perte réseau (contrat : « file bornée »)
 
@@ -80,7 +80,6 @@ class SimRunner:
         self.queue.extend(self.vd.drain_outbox())
         if not self.network_up:
             return
-        cfg = self.vd.config
         hb_due = self.vd.t - self._last_hb >= settings.DEVICE_HEARTBEAT_INTERVAL_SECONDS
         poll_due = self.vd.t - self._last_poll >= settings.DEVICE_COMMAND_POLL_SECONDS
         if force or hb_due:
@@ -103,7 +102,6 @@ class SimRunner:
             if force:
                 devices_svc.ingest_heartbeat(db, device, HeartbeatIn(**self.vd.heartbeat_payload()))
                 self._last_hb = self.vd.t
-        _ = cfg
 
     def step(self, db: Session, seconds: float) -> None:
         with self.lock:

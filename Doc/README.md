@@ -11,6 +11,8 @@ Cette documentation définit la cible à développer maintenant. Elle combine le
 - [Checklist fonctionnelle](CHECKLIST_FONCTIONNELLE.md)
 - [Modèle PostgreSQL](MODELE_POSTGRESQL.md)
 - [Décisions et limites](DECISIONS_ET_LIMITES.md)
+- [Simulateur et mock électronique](SIMULATEUR_ET_MOCK_ELECTRONIQUE.md)
+- [Journal d'implémentation FastAPI](JOURNAL_IMPLEMENTATION_FASTAPI.md)
 
 ## Références amont
 

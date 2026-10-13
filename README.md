@@ -6,7 +6,7 @@ Construire rapidement une solution simple à tester de bout en bout pour supervi
 
 Cible : **FastAPI + Python**, **PostgreSQL**, **Android en Java**, et un **simulateur logiciel** pour les essais sans matériel. La responsable électronique adaptera ensuite son firmware et l'interface physique au contrat documenté ici.
 
-Le backend FastAPI et le nouveau firmware ne sont pas présentés comme déjà implémentés : ce dépôt définit la cible d'organisation et les contrats.
+Le backend FastAPI est implémenté et testé avec un **contrôleur ESP32 simulé** (voir [FastAPI](FastAPI/README.md)). Le nouveau firmware, l'application Android et la validation sur PostgreSQL/matériel réels ne sont pas faits.
 
 ## Dossiers
 
@@ -36,8 +36,8 @@ Le contrôleur conserve les automatismes et sécurités locales. Une commande en
 
 ## État
 
-- [ ] Implémenter FastAPI et PostgreSQL.
-- [ ] Implémenter le simulateur logiciel.
+- [x] Implémenter FastAPI (testé sur SQLite ; PostgreSQL à vérifier).
+- [x] Implémenter le simulateur logiciel ([guide](Doc/SIMULATEUR_ET_MOCK_ELECTRONIQUE.md)).
 - [ ] Construire l'application Android Java selon la conception.
 - [ ] Adapter et tester le firmware selon le contrat.
 - [ ] Tester l'intégration ; faire valider les essais physiques par la personne compétente.

@@ -2,39 +2,41 @@
 
 Cocher uniquement après implémentation et test, pas lorsque la fonction est simplement documentée.
 
+**Mise à jour (backend FastAPI + simulateur)** : `[x]` = implémenté **et** testé avec le backend et le contrôleur *simulé* (78 tests + essai réel uvicorn). Cela ne valide aucun comportement du matériel réel. Les cases non cochées ont une note quand le travail est partiel. Détail : [Journal d'implémentation](JOURNAL_IMPLEMENTATION_FASTAPI.md).
+
 ## P0 — Minimum démontrable
 
 ### Backend et stockage
-- [ ] FastAPI démarre avec configuration locale.
-- [ ] PostgreSQL est la base active.
-- [ ] Migrations Alembic créent et mettent à jour les tables.
-- [ ] Aucun secret réel n'est commité.
-- [ ] /health ne divulgue aucune donnée sensible.
-- [ ] Format d'erreur API cohérent.
+- [x] FastAPI démarre avec configuration locale. *(vérifié avec uvicorn + SQLite)*
+- [ ] PostgreSQL est la base active. *(à faire/à vérifier : SQLite utilisé pour les tests ; PostgreSQL non vérifié en conditions réelles)*
+- [ ] Migrations Alembic créent et mettent à jour les tables. *(à faire/à vérifier : migration 0001 vérifiée aller/retour sur SQLite ; SQL PostgreSQL généré mais non exécuté)*
+- [ ] Aucun secret réel n'est commité. *(à faire/à vérifier : valeurs de démo seulement dans le nouveau code ; clé historique toujours présente dans Archive/ (à renouveler))*
+- [x] /health ne divulgue aucune donnée sensible.
+- [x] Format d'erreur API cohérent.
 
 ### Connexion et droits
-- [ ] Connexion identifiant/mot de passe.
-- [ ] Mots de passe stockés sous forme de hash.
-- [ ] Token expirant et gestion de session expirée dans le mobile.
-- [ ] Rôles ADMIN, OPERATEUR, LECTURE validés dans le backend.
-- [ ] Un utilisateur sans droits ne peut pas contourner les contrôles via l'API.
+- [x] Connexion identifiant/mot de passe.
+- [x] Mots de passe stockés sous forme de hash. *(PBKDF2-SHA256 salé)*
+- [ ] Token expirant et gestion de session expirée dans le mobile. *(à faire/à vérifier : backend fait (expiration + 401) ; côté mobile à faire)*
+- [x] Rôles ADMIN, OPERATEUR, LECTURE validés dans le backend.
+- [x] Un utilisateur sans droits ne peut pas contourner les contrôles via l'API.
 
 ### État et événements
-- [ ] Heartbeat du contrôleur.
-- [ ] Détection d'appareil hors ligne.
-- [ ] Données inconnues distinctes de false.
-- [ ] Timestamp et fraîcheur visibles.
-- [ ] Historique d'événements enregistré dans PostgreSQL.
+- [x] Heartbeat du contrôleur.
+- [x] Détection d'appareil hors ligne. *(90 s + alerte DEVICE_OFFLINE)*
+- [x] Données inconnues distinctes de false.
+- [ ] Timestamp et fraîcheur visibles. *(à faire/à vérifier : exposés par l'API (captured_at, last_seen_at, stale) ; affichage mobile à faire)*
+- [ ] Historique d'événements enregistré dans PostgreSQL. *(à faire/à vérifier : enregistré en base (testé SQLite) ; PostgreSQL non vérifié)*
 
 ### Commandes
-- [ ] Création d'une commande avec identifiant et request_id.
-- [ ] 202 Accepted signifie demande enregistrée, pas résultat physique.
-- [ ] Expiration des commandes.
-- [ ] ESP32 simulé récupère les commandes par polling.
-- [ ] Contrôleur accepte ou refuse avec une raison.
-- [ ] Résultat provenant du contrôleur/simulateur après vérification.
-- [ ] Une requête répétée ne provoque pas une commande dupliquée.
-- [ ] Mode manuel et arrêt d'urgence restent prioritaires.
+- [x] Création d'une commande avec identifiant et request_id.
+- [x] 202 Accepted signifie demande enregistrée, pas résultat physique.
+- [x] Expiration des commandes.
+- [x] ESP32 simulé récupère les commandes par polling.
+- [x] Contrôleur accepte ou refuse avec une raison. *(simulateur)*
+- [x] Résultat provenant du contrôleur/simulateur après vérification.
+- [x] Une requête répétée ne provoque pas une commande dupliquée.
+- [x] Mode manuel et arrêt d'urgence restent prioritaires. *(backend + simulateur ; à re-valider sur le matériel)*
 
 ### Application Java
 - [ ] Connexion et gestion de session expirée.
@@ -48,24 +50,24 @@ Cocher uniquement après implémentation et test, pas lorsque la fonction est si
 - [ ] Palette JIRAMA et contrastes vérifiés.
 
 ### Simulateur et tests
-- [ ] Perte JIRAMA et temporisation.
-- [ ] Rappel opérateur et batterie faible.
-- [ ] Démarrage GE réussi et GE instable.
-- [ ] Trois tentatives de démarrage échouées.
-- [ ] Détection puis stabilité GE avant transfert.
-- [ ] Retour ATS absent ou contradictoire.
-- [ ] Retour JIRAMA stable, refroidissement puis arrêt.
-- [ ] Mode manuel, arrêt d'urgence, défaut GE.
-- [ ] Perte réseau et reconnexion.
-- [ ] Tests automatisés des API et transitions critiques.
+- [x] Perte JIRAMA et temporisation.
+- [x] Rappel opérateur et batterie faible.
+- [x] Démarrage GE réussi et GE instable.
+- [x] Trois tentatives de démarrage échouées.
+- [x] Détection puis stabilité GE avant transfert.
+- [ ] Retour ATS absent ou contradictoire. *(à faire/à vérifier : « absent » simulé et testé ; « contradictoire » (deux positions à la fois) non simulé)*
+- [x] Retour JIRAMA stable, refroidissement puis arrêt.
+- [x] Mode manuel, arrêt d'urgence, défaut GE.
+- [x] Perte réseau et reconnexion.
+- [x] Tests automatisés des API et transitions critiques. *(78 tests)*
 
 ## P1 — Si le temps le permet
-- [ ] Gestion d'utilisateurs par ADMIN.
-- [ ] Configuration des temporisations autorisées.
-- [ ] Acquittement des alertes.
+- [x] Gestion d'utilisateurs par ADMIN.
+- [x] Configuration des temporisations autorisées. *(PATCH config validé, versionné)*
+- [x] Acquittement des alertes.
 - [ ] Résumé des coupures et durées.
 - [ ] Export CSV.
-- [ ] Journal d'audit.
+- [x] Journal d'audit. *(commandes, config, utilisateurs, alertes)*
 - [ ] Notifications Android.
 - [ ] Thème sombre.
 

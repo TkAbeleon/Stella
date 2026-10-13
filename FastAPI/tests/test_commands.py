@@ -1,6 +1,6 @@
 from datetime import timedelta
 
-from app.db.models import Command, DeviceStatus
+from app.db.models import Command
 from app.services.common import utcnow
 from tests.conftest import API, DEVICE_ID, heartbeat_body
 
