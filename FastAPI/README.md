@@ -9,7 +9,7 @@ Python + FastAPI, SQLAlchemy 2.x, Alembic. Cible de production : PostgreSQL. Ce 
 ~~~bash
 cd FastAPI
 python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements-dev.txt   # inclut pytest et httpx
 cp .env.example .env
 # Essai local : éditer .env  ->  DATABASE_URL=sqlite:///./stella_dev.db
 uvicorn app.main:app --reload
@@ -30,6 +30,45 @@ python tools/esp32_mock.py --speed 20 --heartbeat 10 --duration 200 \
 ~~~
 
 Ou sans second processus : se connecter (`POST /api/v1/auth/login`), puis utiliser les routes `/api/v1/simulator/...` (scénarios, avance du temps, mode temps réel) — voir le guide du simulateur.
+
+## Docker
+
+Le `Dockerfile` utilise Python 3.12 slim, installe uniquement les dépendances d'exécution depuis `requirements.txt`, exécute Uvicorn sans mode `--reload` et lance l'application avec un utilisateur non privilégié. Les dépendances de test sont dans `requirements-dev.txt`. Le simulateur et les données de démonstration sont désactivés par défaut dans l'image.
+
+Depuis la racine du dépôt :
+
+```bash
+docker build -t stella-api:local ./FastAPI
+```
+
+Démarrage (remplacer l'adresse de base de données par une adresse joignable depuis le conteneur) :
+
+```bash
+docker run --rm --name stella-api \
+  -p 8000:8000 \
+  -e APP_ENV=production \
+  -e DATABASE_URL='postgresql+psycopg://stella_app:mot-de-passe@hote-postgres:5432/stella' \
+  -e JWT_SECRET_KEY='<secret-aleatoire-long-de-32-caracteres-minimum>' \
+  -e SIMULATOR_ENABLED=false \
+  -e SEED_DEV_DATA=false \
+  stella-api:local
+```
+
+Ne pas placer de vrais secrets dans le dépôt, le Dockerfile ou l'historique du terminal partagé. Injecter les valeurs depuis l'environnement de déploiement ou un gestionnaire de secrets. Depuis un conteneur, `localhost` désigne le conteneur lui-même, pas l'hôte PostgreSQL.
+
+- API : `http://localhost:8000`
+- Documentation interactive : `http://localhost:8000/docs`
+- Contrôle de santé HTTP : `http://localhost:8000/health`
+
+Le contrôle Docker `HEALTHCHECK` vérifie que l'endpoint HTTP répond ; il ne prouve pas que PostgreSQL accepte les connexions.
+
+## Limites actuelles avant un déploiement réel
+
+- Le dépôt ne contient pas encore de migration Alembic/configuration de migration. Le schéma PostgreSQL doit donc être préparé séparément ; le conteneur n'exécute pas de création automatique des tables en production.
+- La validation de démarrage exige un `JWT_SECRET_KEY` valide en production, avec au moins 32 caractères.
+- En production, garder `SIMULATOR_ENABLED=false` et `SEED_DEV_DATA=false`.
+- Le simulateur et les comptes de démonstration sont réservés au développement/test.
+- Une compilation Docker ne remplace ni les tests FastAPI, ni les tests d'intégration à PostgreSQL, ni la validation de sécurité.
 
 ## Organisation
 
@@ -53,8 +92,9 @@ FastAPI/
 ├── alembic/                        # migration 0001 (schéma initial)
 ├── tools/esp32_mock.py             # faux ESP32 autonome en HTTP
 ├── tests/                          # 78 tests
+├── Dockerfile
 ├── .env.example
-└── requirements.txt
+├── requirements.txt / requirements-dev.txt
 ~~~
 
 ## Routes (préfixe `/api/v1`)

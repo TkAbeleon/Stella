@@ -1,37 +1,27 @@
 # Application Android mobile — Java
 
-L'application cible est native Android en Java. Les fichiers de l'ancienne application sont conservés sous Archive/avant-reorganisation/Interface/. Le nouveau développement doit respecter Doc/API_FASTAPI_MOBILE.md et Doc/DESIGN_MOBILE.md.
+Ce dossier contient le projet Android actif Stella, package `mg.stella.mobile`, conservé avant la dernière réorganisation. L'ancien prototype Android est sauvegardé séparément dans `Archive/avant-reorganisation/Interface/`.
 
-## Organisation recommandée
+## Compiler localement
 
-~~~text
-mobile/
-├── app/src/main/java/.../
-│   ├── api/          # client HTTP, DTO, erreurs
-│   ├── auth/         # session et permissions
-│   ├── data/         # repositories et cache léger
-│   ├── model/        # modèles de présentation
-│   ├── ui/
-│   │   ├── login/
-│   │   ├── dashboard/
-│   │   ├── commands/
-│   │   ├── events/
-│   │   ├── alerts/
-│   │   ├── settings/
-│   │   └── users/
-│   └── util/
-├── design/
-├── build.gradle
-└── README.md
-~~~
+Prérequis : JDK 21 et Android SDK correspondant au `compileSdk` du module.
 
-## Règles d'implémentation
+```bash
+chmod +x ./gradlew
+./gradlew --no-daemon testDebugUnitTest assembleDebug
+```
 
-- Utiliser Java et les composants Android/Material compatibles avec le projet.
-- Regrouper les requêtes dans un client API unique.
-- Ne jamais intégrer une clé d'appareil ou un secret backend dans l'APK.
-- Montrer l'état réellement rapporté par l'appareil et l'heure de dernière mise à jour.
-- Après une commande, montrer son statut ; ne pas déduire la réussite de la seule réponse HTTP.
-- Exiger une confirmation avant les actions physiques et désactiver les actions lorsque les données sont périmées ou inconnues.
-- Les permissions sont vérifiées par le backend, même si l'écran est masqué.
-- Tester petits écrans, textes agrandis, rotation et pertes réseau.
+APK de débogage attendu : `app/build/outputs/apk/debug/app-debug.apk`.
+
+## Compilation automatique
+
+Le workflow [Android Build](../.github/workflows/android-build.yml) s'exécute sur les modifications de `mobile/**` poussées sur `main`, les pull requests ciblant `main`, et peut être lancé manuellement. Après réussite, il publie l'APK comme artefact GitHub Actions pendant 14 jours.
+
+## Configuration
+
+- Le package Android et le namespace sont `mg.stella.mobile`.
+- En debug, l'émulateur utilise `http://10.0.2.2:8000/api/v1` pour joindre FastAPI sur le PC hôte.
+- Le build release utilise un domaine fictif de remplacement ; configurer une vraie URL HTTPS avant livraison.
+- Ne pas inclure de secrets dans l'APK.
+
+Le contrat API cible est décrit dans [API_FASTAPI_MOBILE.md](../Doc/API_FASTAPI_MOBILE.md). Le workflow vérifie la compilation et les tests unitaires, mais ne prouve pas à lui seul l'intégration avec un serveur FastAPI en fonctionnement.

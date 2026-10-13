@@ -4,6 +4,8 @@ Cocher uniquement après implémentation et test, pas lorsque la fonction est si
 
 **Mise à jour (backend FastAPI + simulateur)** : `[x]` = implémenté **et** testé avec le backend et le contrôleur *simulé* (78 tests + essai réel uvicorn). Cela ne valide aucun comportement du matériel réel. Les cases non cochées ont une note quand le travail est partiel. Détail : [Journal d'implémentation](JOURNAL_IMPLEMENTATION_FASTAPI.md).
 
+> Application Java : code écrit sur la branche `feature/mobile-android` mais non compilé ni testé sur appareil — les cases restent donc décochées. Détails : [MOBILE_IMPLEMENTATION.md](MOBILE_IMPLEMENTATION.md).
+
 ## P0 — Minimum démontrable
 
 ### Backend et stockage
@@ -38,16 +40,16 @@ Cocher uniquement après implémentation et test, pas lorsque la fonction est si
 - [x] Une requête répétée ne provoque pas une commande dupliquée.
 - [x] Mode manuel et arrêt d'urgence restent prioritaires. *(backend + simulateur ; à re-valider sur le matériel)*
 
-### Application Java
-- [ ] Connexion et gestion de session expirée.
-- [ ] Tableau de bord et état alimentation.
-- [ ] Statut JIRAMA, UPS, GE, ATS avec heure et fraîcheur.
-- [ ] Confirmation des commandes.
-- [ ] Progression des commandes visible.
-- [ ] Historique et alertes consultables.
-- [ ] Chargement, erreur réseau, état vide et hors ligne traités.
-- [ ] Accès administrateur conditionné par le rôle.
-- [ ] Palette JIRAMA et contrastes vérifiés.
+### Application Java 
+- [ ] Connexion et gestion de session expirée.  *(implémenté, non testé)*
+- [ ] Tableau de bord et état alimentation.  *(implémenté, non testé)*
+- [ ] Statut JIRAMA, UPS, GE, ATS avec heure et fraîcheur.  *(implémenté, non testé)*
+- [ ] Confirmation des commandes.  *(implémenté, non testé)*
+- [ ] Progression des commandes visible.  *(implémenté, non testé)*
+- [ ] Historique et alertes consultables.  *(implémenté, non testé)*
+- [ ] Chargement, erreur réseau, état vide et hors ligne traités.  *(implémenté, non testé)*
+- [ ] Accès administrateur conditionné par le rôle.  *(squelette seulement ; implémenté, non testé)*
+- [ ] Palette JIRAMA et contrastes vérifiés. *(palette appliquée, contrastes calculés ; non testé sur appareil)*
 
 ### Simulateur et tests
 - [x] Perte JIRAMA et temporisation.
